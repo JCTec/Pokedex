@@ -1,0 +1,9 @@
+disabled_rules: # rule identifiers to exclude from running
+ - trailing_whitespace
+ - identifier_name
+ - line_length
+ - statement_position
+ - switch_case_alignment
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+ - Carthage
+ - Pods

@@ -1,0 +1,34 @@
+PODS:
+  - IQKeyboardManagerSwift (6.5.2)
+  - lottie-ios (3.1.5)
+  - SDWebImage (5.3.1):
+    - SDWebImage/Core (= 5.3.1)
+  - SDWebImage/Core (5.3.1)
+  - SwiftKeychainWrapper (3.4.0)
+  - UIScrollView-InfiniteScroll (1.1.0)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - lottie-ios
+  - SDWebImage
+  - SwiftKeychainWrapper
+  - UIScrollView-InfiniteScroll
+
+SPEC REPOS:
+  trunk:
+    - IQKeyboardManagerSwift
+    - lottie-ios
+    - SDWebImage
+    - SwiftKeychainWrapper
+    - UIScrollView-InfiniteScroll
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
+  lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
+  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+  UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
+
+PODFILE CHECKSUM: d953eda428ac2389e52d0c3aa95949050e5f5a5e
+
+COCOAPODS: 1.8.4

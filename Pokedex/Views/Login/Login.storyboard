@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BIK-Fy-QQn">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Session View Controller-->
+        <scene sceneID="WzN-Jw-UGl">
+            <objects>
+                <viewController storyboardIdentifier="sessionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2V2-Yf-wV4" customClass="SessionViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fSI-pf-yRE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zq4-Wi-tID" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="117" y="358" width="180" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="9mK-sV-kpC"/>
+                                    <constraint firstAttribute="height" constant="180" id="mGh-U8-PY4"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.82352941176470584" green="0.87058823529411766" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="zq4-Wi-tID" firstAttribute="centerX" secondItem="fSI-pf-yRE" secondAttribute="centerX" id="E0M-wT-qZu"/>
+                            <constraint firstItem="zq4-Wi-tID" firstAttribute="centerY" secondItem="fSI-pf-yRE" secondAttribute="centerY" id="Mjr-Yi-85j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fla-IC-PeZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="puY-Hh-RPT"/>
+                    <connections>
+                        <outlet property="animationView" destination="zq4-Wi-tID" id="amv-6E-syQ"/>
+                        <segue destination="JCR-3n-wgV" kind="show" identifier="loginSegue" animates="NO" id="wl1-Aa-giX"/>
+                        <segue destination="Hrw-AZ-dDh" kind="show" identifier="homeSegue" id="Uxt-y7-lMH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="is5-wE-2wD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="952.17391304347836" y="85.714285714285708"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="USD-j4-nNK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="Hrw-AZ-dDh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6yo-Rq-XYR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzI-2C-MGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="952" y="502"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="axC-8N-0QF">
+            <objects>
+                <viewController storyboardIdentifier="loginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JCR-3n-wgV" customClass="LoginViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aPR-tB-4Gy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokedex" translatesAutoresizingMaskIntoConstraints="NO" id="eX4-ru-myy">
+                                <rect key="frame" x="20" y="336" width="374" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="3Ns-XV-dtL"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jeq-NY-HKd">
+                                <rect key="frame" x="124.5" y="501" width="185" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="s7n-Fh-TNv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLq-Tv-rYg">
+                                <rect key="frame" x="124.5" y="560" width="185" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="NCU-OC-Rbo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selector" translatesAutoresizingMaskIntoConstraints="NO" id="7y2-oI-oNg">
+                                <rect key="frame" x="89.5" y="503" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="071-UD-BeM"/>
+                                    <constraint firstAttribute="height" constant="30" id="xKM-s5-roO"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selector" translatesAutoresizingMaskIntoConstraints="NO" id="emi-Qh-nYE">
+                                <rect key="frame" x="89.5" y="562" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Cqo-Ao-Cil"/>
+                                    <constraint firstAttribute="width" constant="30" id="f17-fl-TTa"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="ZLv-4e-5gR">
+                                <rect key="frame" x="87" y="118" width="240" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Chu-e6-l6t"/>
+                                    <constraint firstAttribute="width" constant="240" id="uC2-oi-cUa"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kez-rB-wwZ" customClass="PokeButton" customModule="Pokedex" customModuleProvider="target">
+                                <rect key="frame" x="132" y="673" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="6lS-Qb-ATW"/>
+                                    <constraint firstAttribute="height" constant="40" id="boU-ft-90J"/>
+                                </constraints>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="didSelectLogin:" destination="JCR-3n-wgV" eventType="touchUpInside" id="dBA-ga-aPT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.82352941176470584" green="0.87058823529411766" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Kez-rB-wwZ" firstAttribute="centerX" secondItem="eX4-ru-myy" secondAttribute="centerX" id="6dR-on-Lgq"/>
+                            <constraint firstItem="dLq-Tv-rYg" firstAttribute="leading" secondItem="emi-Qh-nYE" secondAttribute="trailing" constant="5" id="9kP-fe-pXP"/>
+                            <constraint firstItem="Jeq-NY-HKd" firstAttribute="top" secondItem="eX4-ru-myy" secondAttribute="top" constant="165" id="C72-X5-bUD"/>
+                            <constraint firstItem="eX4-ru-myy" firstAttribute="leading" secondItem="OB4-Hw-75l" secondAttribute="leading" constant="20" id="DBU-K2-bzg"/>
+                            <constraint firstItem="7y2-oI-oNg" firstAttribute="centerY" secondItem="Jeq-NY-HKd" secondAttribute="centerY" id="KFS-9A-UL6"/>
+                            <constraint firstItem="dLq-Tv-rYg" firstAttribute="centerX" secondItem="Jeq-NY-HKd" secondAttribute="centerX" id="LFE-4Y-Ybj"/>
+                            <constraint firstItem="eX4-ru-myy" firstAttribute="bottom" secondItem="Kez-rB-wwZ" secondAttribute="bottom" constant="123" id="VCT-G8-nhK"/>
+                            <constraint firstItem="Jeq-NY-HKd" firstAttribute="centerX" secondItem="aPR-tB-4Gy" secondAttribute="centerX" constant="10" id="XDz-8l-lYd"/>
+                            <constraint firstItem="Jeq-NY-HKd" firstAttribute="leading" secondItem="7y2-oI-oNg" secondAttribute="trailing" constant="5" id="cTb-d5-uid"/>
+                            <constraint firstItem="ZLv-4e-5gR" firstAttribute="top" secondItem="OB4-Hw-75l" secondAttribute="top" constant="30" id="d4x-eA-UeA"/>
+                            <constraint firstItem="dLq-Tv-rYg" firstAttribute="top" secondItem="Jeq-NY-HKd" secondAttribute="bottom" constant="25" id="pKc-it-kxC"/>
+                            <constraint firstItem="eX4-ru-myy" firstAttribute="bottom" secondItem="aPR-tB-4Gy" secondAttribute="bottom" constant="-60" id="rPT-Ju-lB0"/>
+                            <constraint firstItem="ZLv-4e-5gR" firstAttribute="centerX" secondItem="aPR-tB-4Gy" secondAttribute="centerX" id="s2l-wb-cp9"/>
+                            <constraint firstItem="OB4-Hw-75l" firstAttribute="trailing" secondItem="eX4-ru-myy" secondAttribute="trailing" constant="20" id="wSp-nX-Hp1"/>
+                            <constraint firstItem="emi-Qh-nYE" firstAttribute="centerY" secondItem="dLq-Tv-rYg" secondAttribute="centerY" id="xTY-FQ-ExI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OB4-Hw-75l"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="naF-pv-hya"/>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="rPT-Ju-lB0" id="OZr-Xq-C0y"/>
+                        <outlet property="emailField" destination="Jeq-NY-HKd" id="eem-Kf-Y9r"/>
+                        <outlet property="emailSelector" destination="7y2-oI-oNg" id="gts-kN-jAS"/>
+                        <outlet property="loginButton" destination="Kez-rB-wwZ" id="kO4-hh-q2q"/>
+                        <outlet property="logoView" destination="ZLv-4e-5gR" id="pLH-gK-497"/>
+                        <outlet property="passwordField" destination="dLq-Tv-rYg" id="IBx-Us-9vi"/>
+                        <outlet property="passwordSelector" destination="emi-Qh-nYE" id="ceP-Zl-agn"/>
+                        <outlet property="pokedexView" destination="eX4-ru-myy" id="9is-Gh-6XT"/>
+                        <segue destination="Hrw-AZ-dDh" kind="show" identifier="homeSegue" id="PG6-b4-eYy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eeZ-NZ-dv3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1850.7246376811595" y="85.714285714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Muf-qm-7v3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BIK-Fy-QQn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eLX-4l-raC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2V2-Yf-wV4" kind="relationship" relationship="rootViewController" id="Wcf-hx-TDK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0la-0h-pvi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="42.028985507246382" y="85.714285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pokedex" width="378" height="527"/>
+        <image name="pokemon" width="1149" height="627"/>
+        <image name="selector" width="512" height="512"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="PG6-b4-eYy"/>
+    </inferredMetricsTieBreakers>
+</document>

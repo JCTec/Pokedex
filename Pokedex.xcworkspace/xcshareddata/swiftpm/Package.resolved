@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SkeletonView",
+        "repositoryURL": "https://github.com/Juanpe/SkeletonView.git",
+        "state": {
+          "branch": null,
+          "revision": "b431aabddb299950a8556e260505b4d6e5f84c2c",
+          "version": "1.8.3"
+        }
+      },
+      {
+        "package": "ViewAnimator",
+        "repositoryURL": "https://github.com/marcosgriselli/ViewAnimator.git",
+        "state": {
+          "branch": null,
+          "revision": "17e7ba9e9c9e09bfd46086e0189b198fedc67847",
+          "version": "2.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
