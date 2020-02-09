@@ -1,5 +1,5 @@
 # Pokedex
 ## Created for Sunwise
 
-Email: pokedex@pokemon.com
+Email: pokedex@pokemon.com__
 Password: ILovePokemon
