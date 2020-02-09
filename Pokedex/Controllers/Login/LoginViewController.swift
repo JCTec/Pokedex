@@ -50,6 +50,10 @@ class LoginViewController: UIViewController {
     private func setUp() {
         view.backgroundColor = PokeColors.background
         
+        emailField.accessibilityIdentifier = "emailField"
+        passwordField.accessibilityIdentifier = "passwordField"
+        loginButton.accessibilityIdentifier = "login"
+        
         emailField.pokeField("Email")
         passwordField.pokeField("Password")
         
@@ -101,7 +105,14 @@ class LoginViewController: UIViewController {
                     case .failure(let error):
                         DispatchQueue.main.async {
                             self.loginButton.hideLoading()
+                            
+                            if case CredentialsError.wrongEmail = error {
+                                self.emailField.shake()
+                            }else if case CredentialsError.wrongPassword = error {
+                                self.passwordField.shake()
+                            }
                         }
+                        
                         #if DEBUG
                             print(error)
                         #endif

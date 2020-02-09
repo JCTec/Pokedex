@@ -22,13 +22,13 @@ extension UIViewController {
     func setLeftBarItem() {
         let left = #imageLiteral(resourceName: "Menu").resized(toWidth: 25.0)?.withRenderingMode(.alwaysOriginal)
         let leftButton = UIBarButtonItem(image: left, style: .plain, target: self, action: #selector(self.menu))
+        leftButton.tintColor = .black
         navigationItem.leftBarButtonItem = leftButton
     }
     
     func setBackMenu() {
         let left = #imageLiteral(resourceName: "left").resized(toWidth: 25.0)?.withRenderingMode(.alwaysOriginal)
         let leftButton = UIBarButtonItem(image: left, style: .plain, target: self, action: #selector(self.popMe))
-        leftButton.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
         navigationItem.leftBarButtonItem = leftButton
     }
     
@@ -56,13 +56,24 @@ extension UIViewController {
         let rightButton = UIBarButtonItem(customView: label)
             
         navigationItem.rightBarButtonItem = rightButton
+        
+        if !noMenu {
+            addPanGesture()
+        }
+    }
+    
+    func addPanGesture() {
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(menu))
+        gesture.edges = .left
+        
+        view.addGestureRecognizer(gesture)
     }
     
     @objc func menu() {
-        //"menuSegue".performSegue(on: self)
-        //if let menu = self as? SideMenuDelegate {
-            //SideMenuHelper.shared.setDelegate(menu)
-        //}
+        if let menu = self as? SideMenuDelegate {
+            SideMenuHelper.shared.setDelegate(menu)
+        }
+        
         performSegue(withIdentifier: "menuSegue", sender: nil)
     }
     

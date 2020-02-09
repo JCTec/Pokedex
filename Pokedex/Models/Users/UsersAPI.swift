@@ -48,12 +48,23 @@ class UserAPI {
     }
     
     func login(email: String, password: String, completed: @escaping (Result<User, Error>) -> Void) {
-        let user = User(name: "Pokedex User", email: email)
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(user) {
-            saveUser(data: encoded)
-            completed(.success(user))
+        
+        if email == staticEmail {
+            if password == staticPassword {
+                let user = User(name: "Pokedex User", email: email, profilePicture: "https://picsum.photos/200/200")
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(user) {
+                    saveUser(data: encoded)
+                    self.user = user
+                    completed(.success(user))
+                }
+            }else {
+                completed(.failure(CredentialsError.wrongPassword))
+            }
+        }else {
+            completed(.failure(CredentialsError.wrongEmail))
         }
+        
     }
     
     func logout() {

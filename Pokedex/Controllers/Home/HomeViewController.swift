@@ -15,6 +15,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var loading: UIActivityIndicatorView!
     
     var pokemons: [PokemonData] = [PokemonData]()
+    var selectedPokemon: Pokemon?
+    
+    private let detailSegue: String = "detailSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +69,54 @@ class HomeViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.isSkeletonable = true
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        pokeSideMenu(segue.destination)
+        
+        if let vc = segue.destination as? PokeDetailViewController {
+            vc.pokemon = selectedPokemon
+            selectedPokemon = nil
+        }
+        
+        if let vc = segue.destination as? SessionViewController {
+            vc.navigationBarFix = true
+        }
+        
+        // Pass the selected object to the new view controller.
+    }
 
+}
+
+// MARK: - SideMenuDelegate
+extension HomeViewController: SideMenuDelegate {
+    
+    func didSelect(type: TypeMenu) {
+        if type == .logout {
+            API.user.logout()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                type.segue().performSegue(on: self)
+            }
+        }else {
+            //Codigo para agregar mas secciones al Side Menu.
+            /*DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                type.segue().performSegue(on: self)
+            }*/
+        }
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegate
+extension HomeViewController: PokeCollectionViewCellDelegate {
+    
+    func didSelect(_ pokemon: Pokemon) {
+        selectedPokemon = pokemon
+        detailSegue.performSegue(on: self)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -89,10 +139,6 @@ extension HomeViewController: SkeletonCollectionViewDataSource {
         return pokemons.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokemons.count
     }
@@ -102,6 +148,7 @@ extension HomeViewController: SkeletonCollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokeCollectionViewCell.identifier, for: indexPath) as? PokeCollectionViewCell else { return UICollectionViewCell() }
         
         cell.pokeData = pokemons[indexPath.row]
+        cell.delegate = self
 
         return cell
     }

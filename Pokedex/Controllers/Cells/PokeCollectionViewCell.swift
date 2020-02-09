@@ -9,6 +9,10 @@
 import UIKit
 import SkeletonView
 
+protocol PokeCollectionViewCellDelegate: class {
+    func didSelect(_ pokemon: Pokemon)
+}
+
 class PokeCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "pokeCell"
     
@@ -22,11 +26,15 @@ class PokeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var pokeNameLabel: UILabel!
     
+    weak var delegate: PokeCollectionViewCellDelegate?
+    
     private let gradient = SkeletonGradient(baseColor: PokeStaticColors.red)
+    private var pokemon: Pokemon?
 
     var pokeData: PokemonData! {
         didSet {
             pokeNameLabel.text = pokeData.name
+            pokemon = nil
             loadDataWith(pokeData)
         }
     }
@@ -50,6 +58,7 @@ class PokeCollectionViewCell: UICollectionViewCell {
         weightTitleLabel.layer.masksToBounds = true
 
         backView.layer.cornerRadius = 8.0
+        backView.backgroundColor = PokeStaticColors.red
         
         weightLabel.font = PokeFont.regular.font(size: 16.0)
         heightLabel.font = PokeFont.regular.font(size: 16.0)
@@ -64,6 +73,12 @@ class PokeCollectionViewCell: UICollectionViewCell {
 
         pokeNameLabel.font = PokeFont.regular.font(size: 22.0)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didSelectView))
+        tap.cancelsTouchesInView = true
+        
+        backView.isUserInteractionEnabled = true
+        backView.addGestureRecognizer(tap)
+        
         PokeShadows.setShadow(to: backView)
     }
     
@@ -73,6 +88,12 @@ class PokeCollectionViewCell: UICollectionViewCell {
         heightLabel.showAnimatedGradientSkeleton(usingGradient: gradient)
         heightTitleLabel.showAnimatedGradientSkeleton(usingGradient: gradient)
         weightTitleLabel.showAnimatedGradientSkeleton(usingGradient: gradient)
+    }
+    
+    @objc private func didSelectView() {
+        if let pokemon = self.pokemon {
+            delegate?.didSelect(pokemon)
+        }
     }
     
     private func stopAnimatingSkeleton() {
@@ -103,6 +124,8 @@ class PokeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setInfoWith(_ pokemon: Pokemon) {
+        self.pokemon = pokemon
+        
         pokeNameLabel.text = pokemon.name
         
         weightLabel.text = "\(pokemon.weight) Kg"

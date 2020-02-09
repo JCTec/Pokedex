@@ -15,18 +15,30 @@ class SessionViewController: UIViewController {
     
     @IBOutlet weak var animationView: AnimationView!
     
+    var navigationBarFix: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
         // Do any additional setup after loading the view.
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         animationView.play()
-        
+        setRoot()
         load()
+        hideNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if navigationBarFix {
+            hideNavigationBar(animated: true)
+        }
     }
     
     func load() {
@@ -44,8 +56,6 @@ class SessionViewController: UIViewController {
     }
     
     private func setUp() {
-        hideNavigationBar()
-        
         view.backgroundColor = PokeColors.background
 
         animationView.animation = Animation.named("loading")

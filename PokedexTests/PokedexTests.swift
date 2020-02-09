@@ -18,17 +18,63 @@ class PokedexTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testPokeAPI() {
+        let pokeAPI = PokemonAPI()
+        
+        pokeAPI.getPokemon { (result) in
+            switch result {
+            case .success(let pokeData):
+                XCTAssert(!pokeData.isEmpty)
+            case .failure(_):
+                XCTAssert(false)
+            }
         }
     }
+
+    func testLogin() {
+        let userAPI = UserAPI()
+        userAPI.logout()
+
+        XCTAssert(!userAPI.isLoggedIn())
+        
+        userAPI.login(email: "thisIsAWrongEmail@Wrong.com", password: "wrongPassword") { (result) in
+            switch result {
+            case .success(_):
+                XCTAssert(false)
+            case .failure(let error):
+                if let ce = error as? CredentialsError {
+                    XCTAssertEqual(ce, CredentialsError.wrongEmail)
+                    
+                    userAPI.login(email: "pokedex@pokemon.com", password: "wrongPassword") { (result) in
+                        switch result {
+                        case .success(_):
+                            XCTAssert(false)
+                        case .failure(let error):
+                            if let ce = error as? CredentialsError {
+                                XCTAssertEqual(ce, CredentialsError.wrongPassword)
+                                
+                                userAPI.login(email: "pokedex@pokemon.com", password: "ILovePokemon") { (result) in
+                                    switch result {
+                                    case .success(let user):
+                                        XCTAssertEqual(user.email, "pokedex@pokemon.com")
+                                    case .failure(_):
+                                        XCTAssert(false)
+                                    }
+                                }
+                                
+                            }else {
+                                XCTAssert(false)
+                            }
+                        }
+                    }
+                    
+                }else {
+                    XCTAssert(false)
+                }
+            }
+        }
+    }
+
 
 }

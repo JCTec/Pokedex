@@ -13,7 +13,7 @@ struct Pokemon: Codable {
     let id: Int
     let abilities: [Ability]
     let baseExperience: Int
-    let forms: [Species]
+    let forms: [Description]
     let gameIndices: [GameIndex]
     let height: Int
     let heldItems: [HeldItem]
@@ -22,7 +22,7 @@ struct Pokemon: Codable {
     let moves: [Move]
     let name: String
     let order: Int
-    let species: Species
+    let species: Description
     let sprites: Sprites
     let stats: [Stat]
     let types: [TypeElement]
@@ -42,9 +42,23 @@ struct Pokemon: Codable {
     }
 }
 
+// MARK: - Get All Types
+extension Sequence where Iterator.Element == TypeElement {
+    func allTypes() -> String {
+        var types = ""
+        
+        for item in self {
+            types.append(item.type.name)
+            types.append(", ")
+        }
+        
+        return String(types.dropLast().dropLast())
+    }
+}
+
 // MARK: - Ability
 struct Ability: Codable {
-    let ability: Species
+    let ability: Description
     let isHidden: Bool
     let slot: Int
 
@@ -55,8 +69,8 @@ struct Ability: Codable {
     }
 }
 
-// MARK: - Species
-struct Species: Codable {
+// MARK: - Description
+struct Description: Codable {
     let name: String
     let url: String
 }
@@ -64,7 +78,7 @@ struct Species: Codable {
 // MARK: - GameIndex
 struct GameIndex: Codable {
     let gameIndex: Int
-    let version: Species
+    let version: Description
 
     enum CodingKeys: String, CodingKey {
         case gameIndex = "game_index"
@@ -74,7 +88,7 @@ struct GameIndex: Codable {
 
 // MARK: - HeldItem
 struct HeldItem: Codable {
-    let item: Species
+    let item: Description
     let versionDetails: [VersionDetail]
 
     enum CodingKeys: String, CodingKey {
@@ -86,12 +100,12 @@ struct HeldItem: Codable {
 // MARK: - VersionDetail
 struct VersionDetail: Codable {
     let rarity: Int
-    let version: Species
+    let version: Description
 }
 
 // MARK: - Move
 struct Move: Codable {
-    let move: Species
+    let move: Description
     let versionGroupDetails: [VersionGroupDetail]
 
     enum CodingKeys: String, CodingKey {
@@ -103,7 +117,7 @@ struct Move: Codable {
 // MARK: - VersionGroupDetail
 struct VersionGroupDetail: Codable {
     let levelLearnedAt: Int
-    let moveLearnMethod, versionGroup: Species
+    let moveLearnMethod, versionGroup: Description
 
     enum CodingKeys: String, CodingKey {
         case levelLearnedAt = "level_learned_at"
@@ -138,7 +152,7 @@ struct Sprites: Codable {
 // MARK: - Stat
 struct Stat: Codable {
     let baseStat, effort: Int
-    let stat: Species
+    let stat: Description
 
     enum CodingKeys: String, CodingKey {
         case baseStat = "base_stat"
@@ -149,5 +163,5 @@ struct Stat: Codable {
 // MARK: - TypeElement
 struct TypeElement: Codable {
     let slot: Int
-    let type: Species
+    let type: Description
 }

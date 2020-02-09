@@ -11,5 +11,6 @@ target 'Pokedex' do
   pod 'SwiftKeychainWrapper'
   pod 'lottie-ios'
   pod 'UIScrollView-InfiniteScroll'
+  pod 'SideMenu'
 
 end
