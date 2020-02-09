@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
         
     }
     
+    // MARK: - Private Functions
     private func load() {
         API.pokemon.getPokemon { (result) in
             switch result {

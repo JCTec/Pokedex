@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: - MenuController
 struct MenuController {
     let image: UIImage?
     let name: String!
@@ -24,6 +25,7 @@ struct MenuController {
     }
 }
 
+// MARK: - TypeMenu
 enum TypeMenu {
     case home
 

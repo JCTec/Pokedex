@@ -33,6 +33,7 @@ class PokeDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // MARK: - Private Functions
     private func setUp() {
         view.backgroundColor = PokeStaticColors.red
         
@@ -78,17 +79,6 @@ class PokeDetailViewController: UIViewController {
         
         setImageTo(pokemonImage, with: url)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - UIGestureRecognizerDelegate

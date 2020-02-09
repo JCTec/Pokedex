@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
         animate()
     }
     
+    // MARK: - Private Functions
     private func animate() {
         UIView.animate(views: [pokedexView, emailField, passwordField, loginButton, emailSelector], animations: animations, duration: 1.4, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: [.curveEaseIn])
         UIView.animate(views: [logoView], animations: up)
@@ -88,6 +89,7 @@ class LoginViewController: UIViewController {
         return true
     }
     
+    // MARK: - Actions
     @IBAction func didSelectLogin(_ sender: Any) {
         if isValid() {
             loginButton.showLoading()

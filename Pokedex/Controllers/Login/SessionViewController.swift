@@ -41,7 +41,8 @@ class SessionViewController: UIViewController {
         }
     }
     
-    func load() {
+    // MARK: - Private Functions
+    private func load() {
         if API.user.isLoggedIn() {
             //This asyncAfter is to simulate dataload.
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

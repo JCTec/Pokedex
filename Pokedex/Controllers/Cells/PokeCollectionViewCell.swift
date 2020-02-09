@@ -9,10 +9,12 @@
 import UIKit
 import SkeletonView
 
+// MARK: - PokeCollectionViewCellDelegate
 protocol PokeCollectionViewCellDelegate: class {
     func didSelect(_ pokemon: Pokemon)
 }
 
+// MARK: - PokeCollectionViewCell
 class PokeCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "pokeCell"
     
@@ -82,6 +84,7 @@ class PokeCollectionViewCell: UICollectionViewCell {
         PokeShadows.setShadow(to: backView)
     }
     
+    // MARK: - Private Functions
     private func startAnimatingSkeleton() {
         imageView.showAnimatedGradientSkeleton(usingGradient: gradient)
         weightLabel.showAnimatedGradientSkeleton(usingGradient: gradient)

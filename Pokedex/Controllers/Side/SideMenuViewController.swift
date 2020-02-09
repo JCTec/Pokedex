@@ -35,6 +35,7 @@ class SideMenuViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Functions
     private func setUp() {
         hideNavigationBar()
 
