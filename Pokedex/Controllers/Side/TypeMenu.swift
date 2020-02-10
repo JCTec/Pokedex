@@ -44,10 +44,10 @@ enum TypeMenu {
     func toString() -> String {
         switch self {
             case .home:
-                return "Home".localized
+                return "Inicio"
 
             case .logout:
-                return "Logout".localized
+                return "Cerrar Sesión"
         }
     }
     

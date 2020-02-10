@@ -4,4 +4,4 @@
 
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "SDWebImage/SDWebImageManager.h"
-//#import <UIScrollView_InfiniteScroll/UIScrollView+InfiniteScroll.h>
+#import <UIScrollView_InfiniteScroll/UIScrollView+InfiniteScroll.h>

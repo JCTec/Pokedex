@@ -8,6 +8,8 @@
 
 import UIKit
 import SkeletonView
+import UIScrollView_InfiniteScroll
+import ViewAnimator
 
 class HomeViewController: UIViewController {
 
@@ -16,23 +18,48 @@ class HomeViewController: UIViewController {
     
     var pokemons: [PokemonData] = [PokemonData]()
     var selectedPokemon: Pokemon?
+    var page: Int = 1
+    var shouldUpdate: Bool = true
     
     private let detailSegue: String = "detailSegue"
+    private let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+    private lazy var refreshControl: UIRefreshControl = {
+        
+        let refreshControlV = UIRefreshControl()
+        
+        refreshControlV.addTarget(self, action: #selector(reload), for: .valueChanged)
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .font: PokeFont.regular.font(size: 19.0),
+            .foregroundColor: UIColor.black
+        ]
+        
+        refreshControlV.tintColor = UIColor.black
+        refreshControlV.attributedTitle = NSAttributedString(string: "descargando...", attributes: textAttributes)
+        
+        return refreshControlV
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavbar("pokedex")
         setUp()
+        
+        setUpInfiteScrollTo(collectionView)
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setRoot()
-        load()
-        
+        if shouldUpdate {
+            shouldUpdate = false
+            
+            setRoot()
+            load()
+        }
     }
     
     // MARK: - Private Functions
@@ -46,7 +73,12 @@ class HomeViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.loading.stopAnimating()
+                        self.refreshControl.endRefreshing()
                         self.collectionView.reloadData()
+                        self.collectionView.performBatchUpdates({
+                            UIView.animate(views: self.collectionView.orderedVisibleCells,
+                                           animations: self.animations, animationInterval: 0.065, completion: nil)
+                        }, completion: nil)
                     }
                     
                 case .failure(let error):
@@ -56,8 +88,45 @@ class HomeViewController: UIViewController {
                 
                     DispatchQueue.main.async {
                         self.loading.stopAnimating()
+                        self.refreshControl.endRefreshing()
                     }
             }
+        }
+    }
+    
+    @objc private func reload() {
+        self.page = 1
+        load()
+    }
+    
+    private func setUpInfiteScrollTo(_ collectionView: UICollectionView) {
+        collectionView.addInfiniteScroll { (collectionView) in
+            
+            self.page += 1
+            
+            API.pokemon.getPokemon(self.page) { (result) in
+                switch result {
+                    case .success(let pokemonData):
+                        print(pokemonData)
+                        
+                        self.pokemons += pokemonData
+                        
+                        DispatchQueue.main.async {
+                            collectionView.finishInfiniteScroll()
+                            collectionView.reloadData()
+                        }
+                        
+                    case .failure(let error):
+                        #if DEBUG
+                            print(error)
+                        #endif
+                    
+                        DispatchQueue.main.async {
+                            collectionView.finishInfiniteScroll()
+                        }
+                }
+            }
+            
         }
     }
     
@@ -69,6 +138,7 @@ class HomeViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isSkeletonable = true
+        collectionView.refreshControl = refreshControl
     }
     
     // MARK: - Navigation
